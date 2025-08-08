@@ -19,12 +19,6 @@ FoodShare is a socially impactful platform that helps reduce food waste by facil
 
 ---
 
-## 🖼️ Screenshot
-
-> ![App Screenshot](https://i.ibb.co.com/ZznTPyQQ/foodshare.png)
-
----
-
 ## 🔍 Key Features
 
 - ✅ **User Authentication**  
@@ -82,4 +76,40 @@ cd foodshare
 cd client
 npm install
 npm run dev
+
+This will start the React frontend on http://localhost:5173 (or similar depending on your config).
+
+3. Setup Server
+Open a new terminal and run:
+cd server
+npm install
+npm run start
+
+This will start the Express backend on http://localhost:5000 by default.
+
+4. Environment Variables
+Create .env files in both client/ and server/ folders with the following values:
+
+Server .env
+
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+Client .env
+
+VITE_FIREBASE_API_KEY=your_firebase_api_key
+VITE_API_URL=http://localhost:5000
+📁 Project Structure
+
+├── client/         # React Frontend
+│   └── src/
+│       ├── components/
+│       ├── pages/
+│       └── hooks/
+├── server/         # Express Backend
+│   ├── routes/
+│   ├── controllers/
+│   └── models/
+└── README.md
+
 
