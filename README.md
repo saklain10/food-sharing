@@ -8,8 +8,8 @@ A full-stack web application that connects individuals, restaurants, and NGOs to
 
 ## 🌐 Live URLs
 
-- **Client Site:** [https://foodshare-client.example.com](https://foodshare-client.example.com)
-- **Server/API:** [https://foodshare-server.example.com](https://foodshare-server.example.com)
+- **Client Site:** [https://foodshare-client.example.com]([https://foodshare-client.example.com](https://ph11-assignment-11-saklain.web.app/))
+- **Server/API:** [https://foodshare-server.example.com]([https://foodshare-server.example.com](https://mission-scic11-server-template-main.vercel.app/))
 
 ---
 
@@ -68,7 +68,7 @@ Follow these steps to run the project locally:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/foodshare.git
+git clone https://https://github.com/saklain10/food-sharing
 cd foodshare
 
 ## 2. Setup Client
@@ -111,5 +111,6 @@ VITE_API_URL=http://localhost:5000
 │   ├── controllers/
 │   └── models/
 └── README.md
+
 
 
