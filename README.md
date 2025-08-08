@@ -8,8 +8,8 @@ A full-stack web application that connects individuals, restaurants, and NGOs to
 
 ## 🌐 Live URLs
 
-- **Client Site:** [https://foodshare-client.example.com]([https://ph11-assignment-11-saklain.web.app/])
-- **Server/API:** [https://foodshare-server.example.com]([[https://foodshare-server.example.com](https://mission-scic11-server-template-main.vercel.app/)])
+- **Client Site:** [https://ph11-assignment-11-saklain.web.app/](https://ph11-assignment-11-saklain.web.app/)
+- **Server/API:** [https://mission-scic11-server-template-main.vercel.app/](https://mission-scic11-server-template-main.vercel.app/)
 
 ---
 
@@ -111,6 +111,7 @@ VITE_API_URL=http://localhost:5000
 │   ├── controllers/
 │   └── models/
 └── README.md
+
 
 
 
