@@ -59,7 +59,7 @@ const MyRequests = () => {
     } catch (error) {
       console.error("Error fetching my requests:", error);
       toast.error("Failed to load your requests.");
-      setRequests([]); // Clear requests on error
+      setRequests([]); // Clear requests on error.
     } finally {
       setLoading(false);
     }
