@@ -61,7 +61,7 @@ const FoodDetails = () => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`http://localhost:5000/food/${id}`)
+    axios.get(`https://mission-scic11-server-template-main.vercel.app/food/${id}`)
       .then((res) => {
         setFood(res.data);
       })
@@ -103,7 +103,7 @@ const FoodDetails = () => {
         notes,
       };
 
-      await axios.post("http://localhost:5000/food-request", payload, {
+      await axios.post("https://mission-scic11-server-template-main.vercel.app/food-request", payload, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -124,7 +124,7 @@ const FoodDetails = () => {
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           className="w-20 h-20 border-4 border-dashed rounded-full border-blue-500 mx-auto"
         ></motion.div>
-        <p className="mt-4 text-xl text-gray-600 ml-4">Loading food details...</p>
+        {/* <p className="mt-4 text-xl text-gray-600 ml-4">Loading food details...</p> */}
       </div>
     );
   }

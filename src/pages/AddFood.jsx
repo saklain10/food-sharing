@@ -24,7 +24,7 @@
 
 //     try {
 //       const token = await user.getIdToken();
-//       const res = await axios.post('http://localhost:5000/add-food', food, {
+//       const res = await axios.post('https://mission-scic11-server-template-main.vercel.app/add-food', food, {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 //       alert('Food added successfully');
@@ -85,7 +85,7 @@
 
 //     try {
 //       const token = await user.getIdToken();
-//       await axios.post("http://localhost:5000/add-food", food, {
+//       await axios.post("https://mission-scic11-server-template-main.vercel.app/add-food", food, {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 
@@ -217,7 +217,7 @@
 
 //     try {
 //       const token = await user.getIdToken(); // Get ID token for authentication
-//       await axios.post("http://localhost:5000/add-food", food, {
+//       await axios.post("https://mission-scic11-server-template-main.vercel.app/add-food", food, {
 //         headers: { Authorization: `Bearer ${token}` },
 //       });
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getAuth } from 'firebase/auth';
 
 const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'https://mission-scic11-server-template-main.vercel.app',
 });
 
 axiosSecure.interceptors.request.use(async (config) => {

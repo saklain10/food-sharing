@@ -38,7 +38,7 @@ const AuthProvider = ({ children }) => {
           // console.log("🔑 Firebase ID Token:", token);
 
           // Send token to backend
-          const response = await axios.get("http://localhost:5000", {
+          const response = await axios.get("https://mission-scic11-server-template-main.vercel.app", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

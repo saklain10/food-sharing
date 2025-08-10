@@ -66,7 +66,7 @@ const ManageFoods = () => {
     try {
       if (user) { // Ensure user is available before fetching token
         const token = await user.getIdToken();
-        const res = await axios.get('http://localhost:5000/my-foods', {
+        const res = await axios.get('https://mission-scic11-server-template-main.vercel.app/my-foods', {
           headers: { Authorization: `Bearer ${token}` },
         });
         setMyFoods(res.data);
@@ -88,7 +88,7 @@ const ManageFoods = () => {
   const handleDeleteConfirmed = async () => {
     try {
       const token = await user.getIdToken();
-      await axios.delete(`http://localhost:5000/food/${foodToDelete._id}`, {
+      await axios.delete(`https://mission-scic11-server-template-main.vercel.app/food/${foodToDelete._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMyFoods(myFoods.filter(food => food._id !== foodToDelete._id));
@@ -113,7 +113,7 @@ const ManageFoods = () => {
 
     try {
       const token = await user.getIdToken();
-      await axios.patch(`http://localhost:5000/food/${editFood._id}`, updated, {
+      await axios.patch(`https://mission-scic11-server-template-main.vercel.app/food/${editFood._id}`, updated, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

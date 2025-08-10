@@ -26,7 +26,7 @@ const Header = () => {
           Welcome {user?.displayName} ❤️‍🔥. Now You Can Manage Your Foods 🍉🍉
         </p>
       )}
-      <div className="w-11/12 mx-auto py-5 flex justify-between items-center relative">
+      <div className="w-11/12 mx-auto py-5 h-14 flex justify-between items-center relative">
         <Link to="/" className="logo">
           <span className="text-3xl font-bold text-stone-700">
             🍅 FoodSharing

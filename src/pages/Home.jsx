@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Dynamic & Localized Banner Images for better control and performance
+  // Dynamic & Localized Banner Images for better control and performance/
   const bannerImages = [
     {
       src: "https://i.ibb.co/zVMhwKnV/istockphoto-883729432-612x612.jpg",
@@ -40,7 +40,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch featured foods
-    axios.get("http://localhost:5000/available-foods").then((res) => {
+    axios.get("https://mission-scic11-server-template-main.vercel.app/available-foods").then((res) => {
       const sorted = res.data
         .sort((a, b) => b.quantity - a.quantity)
         .slice(0, 6); // top 6

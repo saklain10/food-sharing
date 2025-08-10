@@ -54,7 +54,7 @@ const Register = () => {
   };
 
   return (
-    <div className=" bg-[url(/bg.png)] bg-contain">
+    <div className="">
       <div className=" bg-white bg-opacity-90 min-h-screen">
         <div className="w-11/12 mx-auto py-10 m-5 p-5  ">
           <div className="title mt-5">

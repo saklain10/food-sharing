@@ -51,7 +51,7 @@ const MyRequests = () => {
     try {
       if (user) { // Ensure user is available before fetching token
         const token = await user.getIdToken();
-        const res = await axios.get("http://localhost:5000/my-requests", {
+        const res = await axios.get("https://mission-scic11-server-template-main.vercel.app/my-requests", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setRequests(res.data);
