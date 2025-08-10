@@ -28,10 +28,10 @@ FoodShare is a socially impactful platform that helps reduce food waste by facil
   Add, edit, and delete food listings. See expiration time and location.
 
 - 📍 **Browse Available Donations**  
-  Easily view all available food, filtered by category, expiry, or distance.
+  Easily view all available food, filtered by category, expiry.
 
 - 📦 **Request and Track Pickups**  
-  Users can request available food and view pickup statuses in real-time.
+  Users can request available food and view pickup status.
 
 - 🌐 **Responsive & Accessible UI**  
   Mobile-first responsive design with intuitive navigation.
@@ -43,7 +43,7 @@ FoodShare is a socially impactful platform that helps reduce food waste by facil
 - **Frontend:** React.js, Tailwind CSS, React Router DOM  
 - **Authentication:** Firebase  
 - **Backend:** Node.js, Express.js, MongoDB  
-- **Hosting:** Netlify (Client), Vercel (Server)  
+- **Hosting:** Firebase (Client), Vercel (Server)  
 - **Others:** SweetAlert2, JWT, CORS, dotenv
 
 ---
@@ -111,6 +111,7 @@ VITE_API_URL=http://localhost:5000
 │   ├── controllers/
 │   └── models/
 └── README.md
+
 
 
 
