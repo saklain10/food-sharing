@@ -387,10 +387,10 @@ const Home = () => {
       >
         <div className="max-w-6xl mx-auto px-4">
           <p className="text-lg mb-2">
-            © {new Date().getFullYear()} FoodShare. All rights reserved.
+            © {new Date().getFullYear()} FoodShare... All rights reserved.
           </p>
           <p className="text-sm text-gray-400">
-            Empowering communities through shared meals and reduced waste
+            Empowering communities through shared meals and reduced waste..
           </p>
         </div>
       </motion.footer>
