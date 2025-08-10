@@ -139,7 +139,7 @@ const AvailableFoods = () => {
         </motion.button>
       </motion.div>
 
-      {/* Content */}
+      {/* Content. */}
       {isLoading ? (
         <div className="text-center py-20">
           <motion.div
