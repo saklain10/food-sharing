@@ -10,7 +10,7 @@ const Home = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Use constants for values that are repeated or might change.
+  // Use constants for values that are repeated or might change
   const SLIDE_INTERVAL = 5000; // 5 seconds
   const FEATURED_FOODS_LIMIT = 6;
   const BANNER_TRANSITION_DURATION = 0.8;

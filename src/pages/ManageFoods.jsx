@@ -3,7 +3,7 @@ import { AuthContext } from '../providers/AuthProvider';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { motion, AnimatePresence } from 'framer-motion'; // Import motion and AnimatePresence
+import { motion, AnimatePresence } from 'framer-motion'; // Import motion and AnimatePresence.
 
 const ManageFoods = () => {
   const { user } = useContext(AuthContext);

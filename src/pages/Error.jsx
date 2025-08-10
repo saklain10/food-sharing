@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Error = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-black p-4">
-      {/* 404 Heading */}
+      {/* 404 Heading. */}
       <h1 className="text-9xl font-extrabold text-black tracking-widest animate-pulse">
         404
       </h1>
