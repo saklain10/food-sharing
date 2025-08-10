@@ -390,7 +390,7 @@ const Home = () => {
             © {new Date().getFullYear()} FoodShare. All rights reserved.
           </p>
           <p className="text-sm text-gray-400">
-            Empowering communities through shared meals and reduced waste.
+            Empowering communities through shared meals and reduced waste
           </p>
         </div>
       </motion.footer>
