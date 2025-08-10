@@ -71,13 +71,13 @@ const MyRequests = () => {
 
   return (
     <motion.div
-      className="max-w-6xl mx-auto p-5 py-10 min-h-screen bg-gradient-to-br from-indigo-50 to-blue-50"
+      className="max-w-6xl mx-auto p-5 py-10 min-h-screen"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.h2
-        className="text-5xl font-extrabold mb-10 text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-600 tracking-tight"
+        className="text-5xl font-extrabold mb-10 text-center text-transparent bg-blue-600 bg-clip-text tracking-tight"
         variants={headerVariants}
       >
         My Food Requests

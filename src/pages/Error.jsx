@@ -1,21 +1,3 @@
-// import { useRouteError } from "react-router";
-// import Header from "../components/Header";
-
-// const Error = () => {
-//   const error = useRouteError();
-//   console.log(error);
-//   return (
-//     <div>
-//       <div className="flex min-h-screen items-center justify-center">Error</div>
-//     </div>
-//         // "@tanstack/react-query": "^5.83.0",
-
-//   );
-// };
-
-// export default Error;
-
-
 import { Link } from 'react-router-dom';
 
 const Error = () => {

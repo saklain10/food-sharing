@@ -1,4 +1,3 @@
-
 import React, { useContext, useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
@@ -6,6 +5,7 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { motion, AnimatePresence } from "framer-motion";
+import { format } from 'date-fns';
 
 const FoodDetails = () => {
   const { user } = useContext(AuthContext);
@@ -76,18 +76,17 @@ const FoodDetails = () => {
   }, [id]);
 
   const handleRequest = async () => {
-    // FUNCTIONALITY: Check if the current user is the donor of the food
+    // Check if the current user is the donor of the food
     if (user && food && user.email === food.donorEmail) {
       toast.warn("You cannot request your own donated food.");
-      setShowModal(false); // Close modal if opened by a donor
+      setShowModal(false);
       return;
     }
 
-    // FUNCTIONALITY: Ensure user is logged in before proceeding with request payload
     if (!user) {
-        toast.error("Please log in to request this food.");
-        setShowModal(false);
-        return;
+      toast.error("Please log in to request this food.");
+      setShowModal(false);
+      return;
     }
 
     try {
@@ -97,8 +96,8 @@ const FoodDetails = () => {
         donorName: food.donorName,
         donorEmail: food.donorEmail,
         userEmail: user.email,
-        requestDate: new Date().toISOString(), // Ensure ISO string for consistent date handling
-        expire: food.expire,
+        requestDate: new Date().toISOString(),
+        expireDate: food.expireDate,
         location: food.location,
         notes,
       };
@@ -124,7 +123,6 @@ const FoodDetails = () => {
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           className="w-20 h-20 border-4 border-dashed rounded-full border-blue-500 mx-auto"
         ></motion.div>
-        {/* <p className="mt-4 text-xl text-gray-600 ml-4">Loading food details...</p> */}
       </div>
     );
   }
@@ -177,7 +175,7 @@ const FoodDetails = () => {
             <span className="text-green-500 text-3xl">📍</span> Pickup Location: <span className="text-gray-900">{food.location}</span>
           </p>
           <p className="text-xl font-semibold flex items-center gap-2">
-            <span className="text-red-500 text-3xl">🗓️</span> Expire Date: <span className="text-gray-900">{new Date(food.expire).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</span>
+            <span className="text-red-500 text-3xl">🗓️</span> Expire Date: <span className="text-gray-900">{format(new Date(food.expireDate), "MMM d, yyyy h:mm a")}</span>
           </p>
           <p className="text-xl font-semibold flex items-center gap-2">
             <span className="text-purple-500 text-3xl">🧑‍🍳</span> Donor: <span className="text-gray-900">{food.donorName}</span>
@@ -187,14 +185,10 @@ const FoodDetails = () => {
           </p>
         </motion.div>
 
-        {/* FUNCTIONALITY: The "Request This Food" button is now always shown if food data is loaded.
-            The check to prevent donors from requesting their own food happens inside handleRequest.
-            Added a check for user existence before allowing the click to prevent errors. */}
         {user ? (
-          // Adjusted button container for better centering
           <div className="flex justify-center mt-8">
             <motion.button
-              className="btn btn-primary btn-lg bg-gradient-to-r from-blue-500 to-indigo-600 text-white border-none rounded-full px-10 py-4 text-xl font-semibold shadow-lg hover:shadow-xl transform"
+              className="btn btn-primary btn-lg bg-indigo-600 text-white border-none rounded-full px-10 py-4 text-xl font-semibold shadow-lg hover:shadow-xl transform"
               onClick={() => setShowModal(true)}
               variants={buttonVariants}
               initial="hidden"
@@ -211,7 +205,6 @@ const FoodDetails = () => {
           </p>
         )}
 
-
         {/* Modal */}
         <AnimatePresence>
           {showModal && (
@@ -223,7 +216,7 @@ const FoodDetails = () => {
               exit="exit"
             >
               <motion.div
-                className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-5 relative border border-gray-200"
+                className="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-2xl relative border border-gray-200"
                 variants={modalContentVariants}
                 initial="hidden"
                 animate="visible"
@@ -237,61 +230,58 @@ const FoodDetails = () => {
                 >
                   ✕
                 </motion.button>
-                <h3 className="text-3xl font-extrabold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">Confirm Your Request</h3>
+                <h3 className="text-2xl font-extrabold mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Confirm Your Request</h3>
 
-                {/* MODIFIED: Changed grid-cols for 3-column layout where appropriate */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {/* Read-only fields with modern styling */}
+                {/* Grid for form fields */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-3 gap-x-4 mb-4">
                   <div>
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Food Name</label>
-                    <input readOnly value={food.name} className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed" />
+                    <input readOnly value={food.name} className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed" />
                   </div>
                   <div>
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Food ID</label>
-                    <input readOnly value={food._id} className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed" />
+                    <input readOnly value={food._id} className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed" />
                   </div>
                   <div>
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Donor Email</label>
-                    <input readOnly value={food.donorEmail} className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed" />
+                    <input readOnly value={food.donorEmail} className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed" />
                   </div>
                   <div>
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Your Email</label>
-                    <input readOnly value={user?.email} className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed" />
+                    <input readOnly value={user?.email} className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed" />
                   </div>
                   <div>
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Request Date</label>
-                    <input readOnly value={new Date().toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })} className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed" />
+                    <input readOnly value={format(new Date(), "MMM d, yyyy h:mm a")} className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed" />
                   </div>
                   <div>
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Pickup Location</label>
-                    <input readOnly value={food.location} className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed" />
+                    <input readOnly value={food.location} className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed" />
                   </div>
-                  {/* Expire Date will span 2 columns on medium screens and up to give it more space */}
-                  <div className="col-span-1 sm:col-span-2">
+                  <div className="col-span-full">
                     <label className="block text-gray-700 text-sm font-semibold mb-1">Expire Date</label>
                     <input
                       readOnly
-                      value={new Date(food.expire).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
-                      className="input input-bordered w-full rounded-lg bg-gray-50 text-gray-800 cursor-not-allowed"
+                      value={format(new Date(food.expireDate), "MMM d, yyyy h:mm a")}
+                      className="input input-bordered input-sm w-full rounded-md bg-gray-50 text-gray-800 cursor-not-allowed"
                     />
                   </div>
-                  {/* The notes textarea will span all available columns */}
                   <div className="col-span-full">
                     <label htmlFor="notesInput" className="block text-gray-700 text-sm font-semibold mb-1">Your Message to Donor (Optional)</label>
                     <textarea
                       id="notesInput"
                       placeholder="e.g., I can pick this up tomorrow morning. Thanks!"
-                      className="textarea textarea-bordered textarea-md w-full rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 h-28 resize-y"
+                      className="textarea textarea-bordered w-full rounded-md focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 h-24 resize-y text-sm"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                     />
                   </div>
                 </div>
 
-                <div className="flex justify-end gap-3 mt-6">
+                <div className="flex justify-end gap-3 mt-4">
                   <motion.button
                     type="button"
-                    className="btn btn-neutral btn-lg text-gray-700 hover:text-gray-900 border border-gray-300 bg-white hover:bg-gray-50 rounded-lg px-6 shadow-sm transition-all duration-300"
+                    className="btn btn-neutral text-gray-700 hover:text-gray-900 border border-gray-300 bg-white hover:bg-gray-50 rounded-lg px-4 py-2 text-base shadow-sm transition-all duration-300"
                     onClick={() => setShowModal(false)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -299,7 +289,7 @@ const FoodDetails = () => {
                     Cancel
                   </motion.button>
                   <motion.button
-                    className="btn btn-success btn-lg bg-gradient-to-r from-green-500 to-teal-600 text-white border-none rounded-lg px-6 shadow-md hover:shadow-lg transition-all duration-300"
+                    className="btn btn-success bg-purple-600 text-white border-none rounded-lg px-4 py-2 text-base shadow-md hover:shadow-lg transition-all duration-300"
                     onClick={handleRequest}
                   >
                     Confirm Request

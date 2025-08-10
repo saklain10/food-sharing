@@ -132,13 +132,13 @@ const ManageFoods = () => {
 
   return (
     <motion.div
-      className="max-w-6xl mx-auto p-5 py-10 min-h-screen bg-gradient-to-br from-blue-50 to-purple-50"
+      className="max-w-6xl mx-auto p-5 py-3 min-h-screen"
       variants={pageVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.h2
-        className="text-5xl font-extrabold my-7 text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-500 to-blue-600 tracking-tight"
+        className="text-5xl font-extrabold my-7 text-center bg-clip-text text-blue-700 "
         variants={headerVariants}
       >
         Manage Your Donated Foods
@@ -205,7 +205,7 @@ const ManageFoods = () => {
                     <td className="p-4 text-gray-700">{food.location}</td>
                     <td className="p-4 flex flex-col sm:flex-row gap-2 justify-center">
                       <motion.button
-                        className="btn btn-warning btn-sm min-w-[70px] bg-yellow-500 text-white hover:bg-yellow-600 border-none transition-all duration-300 transform hover:scale-105"
+                        className="btn btn-warning btn-sm min-w-[70px] bg-blue-500 text-white hover:bg-yellow-600 border-none transition-all duration-300 transform hover:scale-105"
                         onClick={() => setEditFood(food)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -213,7 +213,7 @@ const ManageFoods = () => {
                         Edit
                       </motion.button>
                       <motion.button
-                        className="btn btn-error btn-sm min-w-[70px] bg-red-500 text-white hover:bg-red-600 border-none transition-all duration-300 transform hover:scale-105"
+                        className="btn btn-error btn-sm min-w-[70px] bg-blue-700 text-white hover:bg-red-600 border-none transition-all duration-300 transform hover:scale-105"
                         onClick={() => setFoodToDelete(food)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

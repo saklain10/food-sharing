@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import axiosSecure from "../api/axiosSecure";
+import { FaSearch, FaSortAmountDown, FaTh, FaList } from 'react-icons/fa';
+import { IoIosRefresh } from 'react-icons/io';
+import { format } from 'date-fns';
 
 const AvailableFoods = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
   const [layoutColumns, setLayoutColumns] = useState(3);
 
-  const { data: foods = [], isLoading } = useQuery({
+  const { data: foods = [], isLoading, refetch } = useQuery({
     queryKey: ["available-foods"],
     queryFn: async () => {
       const res = await axiosSecure.get("/available-foods");
@@ -25,6 +28,7 @@ const AvailableFoods = () => {
       const dateA = new Date(a.expireDate);
       const dateB = new Date(b.expireDate);
 
+      // Handle invalid dates gracefully at the end of the sort order
       if (isNaN(dateA.getTime()) && isNaN(dateB.getTime())) return 0;
       if (isNaN(dateA.getTime())) return 1;
       if (isNaN(dateB.getTime())) return -1;
@@ -42,8 +46,8 @@ const AvailableFoods = () => {
 
   const gridLayoutClass =
     layoutColumns === 3
-      ? "grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8"
-      : "grid md:grid-cols-2 gap-8";
+      ? "grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      : "grid md:grid-cols-2 gap-6";
 
   // Animations
   const containerVariants = {
@@ -74,49 +78,64 @@ const AvailableFoods = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto p-5 py-10 min-h-screen">
+    <div className="max-w-7xl mx-auto px-4 py-12 min-h-screen">
       <motion.div
         className="text-center mb-12"
         variants={headerVariants}
         initial="hidden"
         animate="visible"
       >
-        <h2 className="text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-teal-500 to-blue-600 mb-4">
+        <h2 className="text-5xl font-extrabold text-blue-600 mb-4">
           Nourishment Awaits
         </h2>
-        <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Explore a wide variety of delicious and fresh foods available for sharing.
         </p>
       </motion.div>
 
       <motion.div
-        className="flex flex-col md:flex-row gap-5 mb-12 justify-center items-center"
+        className="flex flex-col md:flex-row gap-4 mb-12 justify-center items-center"
         variants={controlsVariants}
         initial="hidden"
         animate="visible"
       >
-        <input
-          type="text"
-          placeholder="Search food by name..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-          className="input input-lg input-bordered w-full md:w-96 pl-12 pr-4 rounded-full shadow-lg"
-        />
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-          className="select select-lg select-bordered w-full md:w-48 rounded-full shadow-lg"
-        >
-          <option value="asc">Earliest Expiry</option>
-          <option value="desc">Latest Expiry</option>
-        </select>
+        <div className="relative w-full md:w-96">
+          <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search food by name..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="input input-lg input-bordered w-full pl-12 pr-4 rounded-full shadow-lg border-blue-600 focus:border-blue-600 focus:ring-blue-600"
+          />
+        </div>
+        <div className="relative w-full md:w-48">
+          <FaSortAmountDown className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="select select-lg select-bordered w-full pl-12 pr-4 rounded-full shadow-lg border-blue-600 focus:border-blue-600 focus:ring-blue-600"
+          >
+            <option value="asc">Earliest Expiry</option>
+            <option value="desc">Latest Expiry</option>
+          </select>
+        </div>
         <motion.button
           onClick={toggleLayout}
-          className="btn btn-lg bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-full px-8 py-3 shadow-lg"
+          className="btn btn-lg bg-blue-600 hover:bg-blue-800 text-white rounded-full px-8 py-3 shadow-lg flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          {layoutColumns === 3 ? "Show 2 Columns" : "Show 3 Columns"}
+          {layoutColumns === 3 ? <FaList /> : <FaTh />}
+          <span>{layoutColumns === 3 ? "List View" : "Grid View"}</span>
+        </motion.button>
+        <motion.button
+          onClick={() => refetch()}
+          className="btn btn-lg bg-blue-600 hover:bg-blue-800 text-white rounded-full px-8 py-3 shadow-lg flex items-center gap-2"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <IoIosRefresh className="text-2xl" />
         </motion.button>
       </motion.div>
 
@@ -126,7 +145,7 @@ const AvailableFoods = () => {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-            className="w-16 h-16 border-4 border-dashed rounded-full border-blue-500 mx-auto"
+            className="w-16 h-16 border-4 border-dashed rounded-full border-blue-600 mx-auto"
           ></motion.div>
           <p className="mt-4 text-xl text-gray-600">Loading delicious foods...</p>
         </div>
@@ -141,46 +160,44 @@ const AvailableFoods = () => {
             const expireDate = new Date(food.expireDate);
             const formattedExpireDate = isNaN(expireDate.getTime())
               ? "N/A"
-              : expireDate.toLocaleString([], {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
+              : format(expireDate, "MMM d, yyyy h:mm a");
 
             return (
               <motion.div
                 key={food._id}
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white border rounded-xl shadow-lg overflow-hidden flex flex-col h-full group"
+                whileHover={{ scale: 1.03 }}
+                className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full group transition-all duration-300 transform"
               >
-                <div className="relative h-56">
+                <div className="relative h-48">
                   <img
                     src={food.image}
                     alt={food.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm px-3 py-1 rounded-full">
+                  <div className="absolute top-3 right-3 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md">
                     {food.quantity} units
                   </div>
                 </div>
-                <div className="p-6 flex-grow flex flex-col justify-between">
+                <div className="p-5 flex-grow flex flex-col justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    <h3 className="text-xl font-bold text-gray-800 mb-1">
                       {food.name}
                     </h3>
-                    <p className="text-gray-600 text-base mb-1 flex items-center">
-                      📍 {food.location}
+                    {/* <p className="text-gray-600 text-sm mb-1">
+                      <span className="font-semibold">Donated by:</span>{" "}
+                      {food.donator ? food.donator.name : "Unknown"}
+                    </p> */}
+                    <p className="text-gray-600 text-sm mb-1 flex items-center">
+                      <span className="font-semibold">Location:</span> 📍 {food.location}
                     </p>
-                    <p className="text-gray-600 text-base mb-4 flex items-center">
-                      📅 Expire: {formattedExpireDate}
+                    <p className="text-gray-600 text-sm mb-1 flex items-center">
+                      <span className="font-semibold">Expires:</span> 📅 {formattedExpireDate}
                     </p>
                   </div>
                   <Link to={`/food/${food._id}`}>
                     <motion.button
-                      className="btn btn-block bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg py-3 mt-4"
+                      className="btn btn-block bg-blue-600 hover:bg-blue-800 text-white rounded-lg py-2 mt-4 text-base"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
