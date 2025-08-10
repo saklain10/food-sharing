@@ -10,7 +10,7 @@ A full-stack web application that connects individuals, restaurants, and NGOs to
 
 - **Client Site:** [https://ph11-assignment-11-saklain.web.app/](https://ph11-assignment-11-saklain.web.app/)
 - **Server/API:** [https://mission-scic11-server-template-main.vercel.app/](https://mission-scic11-server-template-main.vercel.app/)
-- - **Server Code:** [https://mission-scic11-server-template-main.vercel.app/](https://github.com/saklain10/food-sharing-server)
+- **Server Code:** [https://mission-scic11-server-template-main.vercel.app/](https://github.com/saklain10/food-sharing-server)
 
 ---
 
@@ -112,4 +112,5 @@ VITE_API_URL=http://localhost:5000
 │   ├── controllers/
 │   └── models/
 └── README.md
+
 
