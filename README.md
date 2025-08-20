@@ -1,4 +1,4 @@
-# ♻️ FoodShare
+# ♻️ FoodSharing
 
 ![Project Banner](https://i.ibb.co.com/ZznTPyQQ/foodshare.png)
 
@@ -112,6 +112,7 @@ VITE_API_URL=http://localhost:5000
 │   ├── controllers/
 │   └── models/
 └── README.md
+
 
 
 
